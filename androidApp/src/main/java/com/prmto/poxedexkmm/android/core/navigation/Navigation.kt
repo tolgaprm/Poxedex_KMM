@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.prmto.poxedexkmm.android.on_boarding.navigation.onboardingScreen
 import com.prmto.poxedexkmm.android.splash.navigation.splashScreen
 
 @Composable
@@ -26,9 +27,13 @@ fun PoxedexNavigation() {
             }
         )
 
-        composable(Screens.OnBoardingScreen.route) {
-            Text(text = "OnBoardingScreen ")
-        }
+        onboardingScreen(
+            onNavigateToHome = {
+                navController.navigate(Screens.HomeScreen.route) {
+                    popUpTo(Screens.OnBoardingScreen.route) { inclusive = true }
+                }
+            }
+        )
 
         composable(Screens.HomeScreen.route) {
             Text(text = "HomeScreen ")

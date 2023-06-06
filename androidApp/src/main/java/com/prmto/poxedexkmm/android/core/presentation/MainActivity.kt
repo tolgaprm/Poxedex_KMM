@@ -1,4 +1,4 @@
-package com.prmto.poxedexkmm.android
+package com.prmto.poxedexkmm.android.core.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
