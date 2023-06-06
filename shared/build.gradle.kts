@@ -33,8 +33,14 @@ kotlin {
             export(libs.multiplatformPaging)
         }
     }
-    
+
     sourceSets {
+
+        val androidMain by getting {
+            dependencies {
+                implementation(libs.androidXLifecycleViewModelKtx)
+            }
+        }
         val commonMain by getting {
             dependencies {
                 implementation(libs.ktor.core)
@@ -43,6 +49,9 @@ kotlin {
 
                 implementation(libs.multiplatformSettings)
                 api(libs.multiplatformPaging)
+                implementation(libs.koin.core)
+
+                api(libs.kmm.view.model)
             }
         }
         val commonTest by getting {

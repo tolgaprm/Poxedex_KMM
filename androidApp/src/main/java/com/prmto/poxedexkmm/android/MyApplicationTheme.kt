@@ -1,11 +1,9 @@
 package com.prmto.poxedexkmm.android
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Shapes
 import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -15,15 +13,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.prmto.poxedexkmm.core.presentation.Colors
-import okhttp3.internal.wait
 
 @Composable
 fun MyApplicationTheme(
     content: @Composable () -> Unit
 ) {
+
     val colors = lightColors(
         primary = Color(Colors.EgyptianBlue),
-        onPrimary = Color.White
+        onPrimary = Color.White,
+        background = Color.White
     )
 
     val typography = Typography(

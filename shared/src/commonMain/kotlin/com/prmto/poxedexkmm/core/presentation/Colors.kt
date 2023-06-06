@@ -3,6 +3,8 @@ package com.prmto.poxedexkmm.core.presentation
 object Colors {
     const val EgyptianBlue = 0xFF173EA5 // primary
 
+    const val splashScreenBackground = 0xFF000029
+
     const val Squant = 0xFF666666
 
     const val AllTypes = 0xFF333333

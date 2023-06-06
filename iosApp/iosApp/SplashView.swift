@@ -7,15 +7,22 @@
 //
 
 import SwiftUI
+import shared
+import KMMViewModelSwiftUI
 
 struct SplashView: View {
-    @State var isActive: Bool = false
+   @StateViewModel var viewModel = SplashViewModel()
+    @State var isActive:Bool = false
     
     var body: some View {
         ZStack{
-            if self.isActive{
+            if self.viewModel.onBoardingCompleted{
                 ContentView()
             }else{
+                OnBoardingScreen()
+            }
+            
+            if !self.isActive{
                 Color("splashScreenBackground").ignoresSafeArea()
             
                Image("logo")
@@ -25,7 +32,7 @@ struct SplashView: View {
         }.onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation {
-                    self.isActive = true
+                    isActive = true
                 }
             }
         }
@@ -34,6 +41,6 @@ struct SplashView: View {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView(isActive: false)
+        SplashView()
     }
 }

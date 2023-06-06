@@ -49,5 +49,9 @@ dependencies {
     implementation(libs.compose.coil)
     implementation(libs.compose.navigation)
     implementation(libs.paging.runtime)
-    implementation(libs.splash.screen)
+
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
 }

@@ -13,6 +13,8 @@
 		7231118238D58DE765EFE875 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87703FB8CD075BE0A9E47174 /* Pods_iosApp.framework */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		E00936352A2DFEC70085D88E /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00936342A2DFEC70085D88E /* SplashView.swift */; };
+		E0794F5B2A2F35F10038BC81 /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0794F5A2A2F35F10038BC81 /* OnBoardingScreen.swift */; };
+		E079A6522A2F3049009574B4 /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E079A6512A2F3049009574B4 /* KMMViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		87703FB8CD075BE0A9E47174 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE7CE22C2016F3468AF40B67 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		E00936342A2DFEC70085D88E /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		E0794F5A2A2F35F10038BC81 /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
+		E079A6512A2F3049009574B4 /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				E00936342A2DFEC70085D88E /* SplashView.swift */,
+				E079A6512A2F3049009574B4 /* KMMViewModel.swift */,
+				E0794F5A2A2F35F10038BC81 /* OnBoardingScreen.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -212,7 +218,9 @@
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				E079A6522A2F3049009574B4 /* KMMViewModel.swift in Sources */,
 				E00936352A2DFEC70085D88E /* SplashView.swift in Sources */,
+				E0794F5B2A2F35F10038BC81 /* OnBoardingScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
