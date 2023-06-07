@@ -38,37 +38,59 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen(
-    onNavigateToHome: () -> Unit
+    onNavigateToHome: () -> Unit,
+    onBoardingData: List<OnBoardingData>
 ) {
     val pagerState = rememberPagerState()
 
-    val pageCount = getOnBoardingData().size
+    val pageCount = onBoardingData.size
     val scope = rememberCoroutineScope()
 
     Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(padding),
-            pageCount = pageCount
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
-            HorizontalPagerItem(
-                onBoardingData = getOnBoardingData()[it],
-                pageCount = pageCount,
-                currentPage = pagerState.currentPage,
-                onContinueClicked = {
-                    if (pagerState.currentPage < pageCount - 1) {
-                        scope.launch {
-                            pagerState.scrollToPage(pagerState.currentPage + 1)
-                        }
-                    } else {
-                        onNavigateToHome()
-                    }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                HorizontalPager(
+                    state = pagerState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(padding),
+                    pageCount = pageCount
+                ) {
+                    HorizontalPagerItem(
+                        onBoardingData = getOnBoardingData()[it],
+                    )
                 }
-            )
-        }
 
+                PagerIndicator(
+                    pageCount = pageCount,
+                    currentPage = pagerState.currentPage
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = {
+                        if (pagerState.currentPage < pageCount - 1) {
+                            scope.launch {
+                                pagerState.scrollToPage(pagerState.currentPage + 1)
+                            }
+                        } else {
+                            onNavigateToHome()
+                        }
+                    },
+                    modifier = Modifier.clip(RoundedCornerShape(50))
+                ) {
+                    Text(
+                        text = stringResource(R.string.continues),
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -115,51 +137,28 @@ fun UnSelectedPagerIndicator() {
 @Composable
 fun HorizontalPagerItem(
     modifier: Modifier = Modifier,
-    onBoardingData: OnBoardingData,
-    pageCount: Int,
-    currentPage: Int,
-    onContinueClicked: () -> Unit = {}
+    onBoardingData: OnBoardingData
 ) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                painter = painterResource(id = onBoardingData.image),
-                contentDescription = onBoardingData.title,
-                modifier = Modifier.size(250.dp)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = onBoardingData.title,
-                style = MaterialTheme.typography.h4
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = onBoardingData.description,
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Center
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            PagerIndicator(
-                pageCount = pageCount,
-                currentPage = currentPage
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = onContinueClicked,
-                modifier = Modifier.clip(RoundedCornerShape(50))
-            ) {
-                Text(
-                    text = stringResource(R.string.continues),
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-            }
-        }
+        Image(
+            painter = painterResource(id = onBoardingData.image),
+            contentDescription = onBoardingData.title,
+            modifier = Modifier.size(250.dp)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = onBoardingData.title,
+            style = MaterialTheme.typography.h4
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = onBoardingData.description,
+            style = MaterialTheme.typography.body2,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }

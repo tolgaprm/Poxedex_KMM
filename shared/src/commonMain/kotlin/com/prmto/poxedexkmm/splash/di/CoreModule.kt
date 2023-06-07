@@ -1,5 +1,7 @@
 package com.prmto.poxedexkmm.splash.di
 
+import com.prmto.poxedexkmm.on_boarding.presentation.OnBoardingData
+import com.prmto.poxedexkmm.on_boarding.presentation.getOnBoardingData
 import com.prmto.poxedexkmm.splash.data.SettingKeyValueImpl
 import com.prmto.poxedexkmm.splash.domain.repo.KeyValueLocalRepo
 import com.prmto.poxedexkmm.splash.domain.usecase.CoreUseCases
@@ -18,5 +20,9 @@ val splashModule = module {
             getOnBoardingStateUseCase = GetOnBoardingStateUseCase(get()),
             saveOnBoardingStateUseCase = SaveOnBoardingStateUseCase(get())
         )
+    }
+
+    single<List<OnBoardingData>> {
+        getOnBoardingData()
     }
 }

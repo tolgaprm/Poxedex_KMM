@@ -1,17 +1,17 @@
 PODS:
-  - KMMViewModelCore (1.0.0-ALPHA-9):
-    - KMMViewModelCoreObjC (= 1.0.0-ALPHA-9)
-  - KMMViewModelCoreObjC (1.0.0-ALPHA-9)
-  - KMMViewModelSwiftUI (1.0.0-ALPHA-9):
-    - KMMViewModelCore (= 1.0.0-ALPHA-9)
-  - KMPNativeCoroutinesAsync (1.0.0-ALPHA-10):
-    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-10)
-  - KMPNativeCoroutinesCore (1.0.0-ALPHA-10)
+  - KMMViewModelCore (1.0.0-ALPHA-7):
+    - KMMViewModelCoreObjC (= 1.0.0-ALPHA-7)
+  - KMMViewModelCoreObjC (1.0.0-ALPHA-7)
+  - KMMViewModelSwiftUI (1.0.0-ALPHA-7):
+    - KMMViewModelCore (= 1.0.0-ALPHA-7)
+  - KMPNativeCoroutinesAsync (1.0.0-ALPHA-8):
+    - KMPNativeCoroutinesCore (= 1.0.0-ALPHA-8)
+  - KMPNativeCoroutinesCore (1.0.0-ALPHA-8)
   - shared (1.0)
 
 DEPENDENCIES:
-  - KMMViewModelSwiftUI (= 1.0.0-ALPHA-9)
-  - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-10)
+  - KMMViewModelSwiftUI (= 1.0.0-ALPHA-7)
+  - KMPNativeCoroutinesAsync (= 1.0.0-ALPHA-8)
   - shared (from `../shared`)
 
 SPEC REPOS:
@@ -27,13 +27,13 @@ EXTERNAL SOURCES:
     :path: "../shared"
 
 SPEC CHECKSUMS:
-  KMMViewModelCore: 6f4b4973cd6f6111506adf2e31189b8eeff048d3
-  KMMViewModelCoreObjC: f70210413c9568b842f6d59e303fdf2609c54e04
-  KMMViewModelSwiftUI: bfb74521818e3f7bf342fec0f4fe0ada6be6e3df
-  KMPNativeCoroutinesAsync: c941aeffc6fef5ab52fa6448221d130c050a9574
-  KMPNativeCoroutinesCore: 826573240f36e70f257c5215acab10a72b05ba82
+  KMMViewModelCore: 9d554bb451b3bc8f438ece7cb012816b2b2cdd99
+  KMMViewModelCoreObjC: 44f94f242bb6510a06c4026fcbd34ecce1ff9296
+  KMMViewModelSwiftUI: 7d0ff2588b0bd2372b67f560ffc8f22622f2b03f
+  KMPNativeCoroutinesAsync: 4a5c207b7e01ee6a60872b0cf41b4a971f2021cd
+  KMPNativeCoroutinesCore: 2ee4a651f885c03724846b3dc3565880d8904595
   shared: 2d3b24a8fe27b7d9e65b8d075a9672fbc6a1aa10
 
-PODFILE CHECKSUM: bcaeb4dfc87bf37fd7787163639b2a138b06c681
+PODFILE CHECKSUM: 5debecaeb7b3ac29bbf10c186abc0995bb0c31bf
 
 COCOAPODS: 1.12.0

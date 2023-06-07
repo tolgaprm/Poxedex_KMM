@@ -7,6 +7,7 @@ import org.koin.core.component.inject
 
 open class OnBoardingViewModel : KMMViewModel(), KoinComponent {
     private val coreUseCases: CoreUseCases by inject()
+    val onBoardingData: List<OnBoardingData> by inject()
 
     fun onBoardingCompleted() {
         coreUseCases.saveOnBoardingStateUseCase(

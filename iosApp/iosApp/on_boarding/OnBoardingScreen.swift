@@ -7,12 +7,24 @@
 //
 
 import SwiftUI
+import shared
+import KMMViewModelSwiftUI
 
 struct OnBoardingScreen: View {
+    @StateViewModel var viewModel = OnBoardingViewModel()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        LazyHStack {
+            PageView(
+                onBoardingData: viewModel.onBoardingData,
+                onClickContinue: {
+                    viewModel.onBoardingCompleted()
+                }
+            )
+        }
     }
 }
+
 
 struct OnBoardingScreen_Previews: PreviewProvider {
     static var previews: some View {

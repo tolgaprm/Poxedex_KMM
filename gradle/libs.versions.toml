@@ -18,11 +18,11 @@ androidxLifecycleVersion = "2.6.1"
 
 
 # Shared Module
-ktorVersion = "2.3.0"
+ktorVersion = "2.1.3"
 sqlDelightVersion = "1.5.4"
 truthVersion = "1.1.3"
 turbineVersion = "0.13.0"
-kmm-view-model-version = "1.0.0-ALPHA-9"
+kmm-view-model-version = "1.0.0-ALPHA-7"
 
 multiplatfromSettingsVersion = "1.0.0"
 multiplatfrom-paging-version = "0.6.2"

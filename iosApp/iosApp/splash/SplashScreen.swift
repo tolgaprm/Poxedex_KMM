@@ -10,14 +10,14 @@ import SwiftUI
 import shared
 import KMMViewModelSwiftUI
 
-struct SplashView: View {
+struct SplashScreen: View {
    @StateViewModel var viewModel = SplashViewModel()
     @State var isActive:Bool = false
     
     var body: some View {
         ZStack{
             if self.viewModel.onBoardingCompleted{
-                ContentView()
+                HomeScreen()
             }else{
                 OnBoardingScreen()
             }
@@ -36,11 +36,12 @@ struct SplashView: View {
                 }
             }
         }
+        .statusBar(hidden: true)
     }
 }
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView()
+        SplashScreen()
     }
 }

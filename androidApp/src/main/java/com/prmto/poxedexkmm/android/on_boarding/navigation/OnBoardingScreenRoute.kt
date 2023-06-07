@@ -16,7 +16,8 @@ fun NavGraphBuilder.onboardingScreen(
             onNavigateToHome = {
                 viewModel.onBoardingCompleted()
                 onNavigateToHome()
-            }
+            },
+            onBoardingData = viewModel.onBoardingData
         )
     }
 }
