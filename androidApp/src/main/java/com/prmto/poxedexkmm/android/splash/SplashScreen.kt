@@ -14,7 +14,6 @@ import com.prmto.poxedexkmm.core.presentation.Colors
 
 @Composable
 fun SplashScreen() {
-
     Box(
         modifier = Modifier
             .fillMaxSize()

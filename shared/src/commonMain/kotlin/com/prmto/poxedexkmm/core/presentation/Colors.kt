@@ -5,6 +5,10 @@ object Colors {
 
     const val splashScreenBackground = 0xFF000029
 
+    const val onSurfaceColor = 0xFF999999
+    const val black = 0xFF000000
+    const val white = 0xFFFFFFFF
+
     const val Squant = 0xFF666666
 
     const val AllTypes = 0xFF333333

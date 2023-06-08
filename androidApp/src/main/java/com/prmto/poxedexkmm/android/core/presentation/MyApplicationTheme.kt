@@ -17,13 +17,14 @@ fun MyApplicationTheme(
     val colors = lightColors(
         primary = Color(Colors.EgyptianBlue),
         onPrimary = Color.White,
-        background = Color.White
+        background = Color.White,
+        onSurface = Color(Colors.onSurfaceColor),
     )
 
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),
         medium = RoundedCornerShape(4.dp),
-        large = RoundedCornerShape(0.dp)
+        large = RoundedCornerShape(8.dp)
     )
 
     MaterialTheme(

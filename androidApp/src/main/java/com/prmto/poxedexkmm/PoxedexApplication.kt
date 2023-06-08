@@ -1,6 +1,7 @@
 package com.prmto.poxedexkmm
 
 import android.app.Application
+import com.prmto.poxedexkmm.android.home.di.homeModule
 import com.prmto.poxedexkmm.android.on_boarding.di.androidOnBoardingModule
 import com.prmto.poxedexkmm.android.splash.di.androidSplashModule
 import com.prmto.poxedexkmm.di.initKoin
@@ -15,7 +16,11 @@ class PoxedexApplication : Application() {
         initKoin {
             androidLogger()
             androidContext(this@PoxedexApplication)
-            modules(androidSplashModule, androidOnBoardingModule)
+            modules(
+                androidSplashModule,
+                androidOnBoardingModule,
+                homeModule
+            )
         }
     }
 
