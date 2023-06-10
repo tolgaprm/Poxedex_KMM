@@ -21,6 +21,8 @@ struct OnBoardingScreen: View {
                     viewModel.onBoardingCompleted()
                 }
             )
+        }.onTapGesture {
+            viewModel.onBoardingCompleted()
         }
     }
 }

@@ -2,15 +2,22 @@ package com.prmto.poxedexkmm.home.presentation
 
 import com.prmto.poxedexkmm.core.data.Order
 import com.prmto.poxedexkmm.core.data.PokemonType
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import org.koin.core.component.KoinComponent
 
-open class HomeViewModel : KMMViewModel(), KoinComponent {
+class HomeViewModel(
+    coroutineScope: CoroutineScope? = null
+) {
 
-    private val _state = MutableStateFlow(viewModelScope, HomeScreenState())
+    val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
+
+    private val _state = MutableStateFlow(
+        HomeScreenState()
+    )
+
     val state = _state.asStateFlow()
 
     fun onEvent(event: HomeScreenEvent) {

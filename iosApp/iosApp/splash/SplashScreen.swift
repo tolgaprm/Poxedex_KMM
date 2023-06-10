@@ -17,14 +17,13 @@ struct SplashScreen: View {
     var body: some View {
         ZStack{
             if self.viewModel.onBoardingCompleted{
-                HomeScreen()
+                BottomNav()
             }else{
                 OnBoardingScreen()
             }
-            
+           
             if !self.isActive{
                 Color("splashScreenBackground").ignoresSafeArea()
-            
                Image("logo")
                     .resizable()
                     .scaledToFit()

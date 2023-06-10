@@ -29,7 +29,7 @@ struct PageView: View {
                     
                     if currentPage == 1 {
                         NavigationLink {
-                            HomeScreen()
+                            BottomNav()
                         } label: {
                             Text("Continue").font(.button)
                                 .padding(.horizontal, 16)

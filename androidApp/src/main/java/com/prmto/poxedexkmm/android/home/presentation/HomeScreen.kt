@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -55,6 +56,7 @@ fun HomeScreen(
         mutableStateOf(false)
     }
 
+
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(
             initialValue = BottomSheetValue.Collapsed
@@ -63,7 +65,9 @@ fun HomeScreen(
     val coroutineScope = rememberCoroutineScope()
 
     BottomSheetScaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 56.dp),
         scaffoldState = bottomSheetScaffoldState,
         sheetGesturesEnabled = false,
         sheetContent = {
@@ -88,6 +92,7 @@ fun HomeScreen(
     ) { paddingValues ->
         HomeScreenContent(
             modifier = Modifier
+                .navigationBarsPadding()
                 .padding(paddingValues)
                 .padding(16.dp),
             onExpandBottomSheetForSelectPokemonType = {
