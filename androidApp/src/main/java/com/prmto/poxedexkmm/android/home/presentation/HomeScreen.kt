@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -35,13 +37,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.itemKey
 import com.prmto.poxedexkmm.android.R
+import com.prmto.poxedexkmm.android.home.presentation.components.PokemonItem
 import com.prmto.poxedexkmm.android.home.presentation.components.PoxedexTextField
 import com.prmto.poxedexkmm.android.home.presentation.components.SelectionType
 import com.prmto.poxedexkmm.core.data.Order
 import com.prmto.poxedexkmm.core.data.PokemonType
 import com.prmto.poxedexkmm.core.data.order
 import com.prmto.poxedexkmm.core.presentation.Colors
+import com.prmto.poxedexkmm.home.domain.model.Pokemon
 import com.prmto.poxedexkmm.home.presentation.HomeScreenEvent
 import com.prmto.poxedexkmm.home.presentation.HomeScreenState
 import kotlinx.coroutines.launch
@@ -50,6 +56,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     homeState: HomeScreenState,
+    pokemonPagingItems: LazyPagingItems<Pokemon>,
     onEvent: (HomeScreenEvent) -> Unit,
 ) {
     val isShowPokemonTypes = remember {
@@ -91,10 +98,8 @@ fun HomeScreen(
         sheetPeekHeight = 0.dp
     ) { paddingValues ->
         HomeScreenContent(
-            modifier = Modifier
-                .navigationBarsPadding()
-                .padding(paddingValues)
-                .padding(16.dp),
+            modifier = Modifier.padding(paddingValues),
+            pokemonPagingItems = pokemonPagingItems,
             onExpandBottomSheetForSelectPokemonType = {
                 isShowPokemonTypes.value = true
                 coroutineScope.launch {
@@ -207,6 +212,7 @@ fun BottomSheetItem(
 fun HomeScreenContent(
     modifier: Modifier = Modifier,
     selectedPokemonType: PokemonType,
+    pokemonPagingItems: LazyPagingItems<Pokemon>,
     selectedOrder: Order,
     searchText: String = "",
     onExpandBottomSheetForSelectPokemonType: () -> Unit,
@@ -214,37 +220,51 @@ fun HomeScreenContent(
     onSearchTextChange: (String) -> Unit,
     onSearch: (String) -> Unit = { }
 ) {
-    Column(
-        modifier = modifier
+    LazyColumn(
+        contentPadding = PaddingValues(16.dp),
+        modifier = modifier.navigationBarsPadding(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        PoxedexTextField(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = searchText,
-            placeHolderText = stringResource(R.string.search_pokemon),
-            onTextChange = onSearchTextChange,
-            onSearch = onSearch
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            SelectionType(
-                modifier = Modifier.weight(1f),
-                backgroundColor = selectedPokemonType.color,
-                textColor = selectedPokemonType.textColor,
-                name = selectedPokemonType.name,
-                onClick = onExpandBottomSheetForSelectPokemonType
+        item {
+            PoxedexTextField(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = searchText,
+                placeHolderText = stringResource(R.string.search_pokemon),
+                onTextChange = onSearchTextChange,
+                onSearch = onSearch
             )
+        }
+        item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                SelectionType(
+                    modifier = Modifier.weight(1f),
+                    backgroundColor = selectedPokemonType.color,
+                    textColor = selectedPokemonType.textColor,
+                    name = selectedPokemonType.name,
+                    onClick = onExpandBottomSheetForSelectPokemonType
+                )
 
-            SelectionType(
-                modifier = Modifier.weight(1f),
-                backgroundColor = Colors.AllTypes,
-                textColor = Colors.white,
-                name = selectedOrder.name,
-                onClick = onExpandBottomSheetForOrderType
-            )
+                SelectionType(
+                    modifier = Modifier.weight(1f),
+                    backgroundColor = Colors.AllTypes,
+                    textColor = Colors.white,
+                    name = selectedOrder.name,
+                    onClick = onExpandBottomSheetForOrderType
+                )
+            }
+        }
+
+        items(
+            count = pokemonPagingItems.itemCount,
+            key = pokemonPagingItems.itemKey { it.id }
+        ) { index ->
+            pokemonPagingItems[index]?.let { pokemonItem ->
+                PokemonItem(pokemon = pokemonItem)
+            }
         }
     }
 }

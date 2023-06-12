@@ -1,4 +1,4 @@
-package com.prmto.poxedexkmm.home.data.responses
+package com.prmto.poxedexkmm.home.data.model.dto
 
 
 import kotlinx.serialization.*
@@ -7,7 +7,7 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 @Serializable
-data class Pokemon(
+data class PokemonDto(
     val abilities: List<Ability>,
 
     @SerialName("base_experience")
@@ -41,7 +41,7 @@ data class Pokemon(
     val species: Species,
     val sprites: Sprites,
     val stats: List<Stat>,
-    val types: List<Type>,
+    val types: List<TypeDto>,
     val weight: Long
 )
 
@@ -167,79 +167,79 @@ data class Sprites(
 @Serializable
 data class GenerationI(
     @SerialName("red-blue")
-    val redBlue: RedBlue,
+    val redBlue: RedBlue?,
 
-    val yellow: RedBlue
+    val yellow: RedBlue?
 )
 
 @Serializable
 data class RedBlue(
     @SerialName("back_default")
-    val backDefault: String,
+    val backDefault: String?,
 
     @SerialName("back_gray")
-    val backGray: String,
+    val backGray: String?,
 
     @SerialName("back_transparent")
-    val backTransparent: String,
+    val backTransparent: String?,
 
     @SerialName("front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
 
     @SerialName("front_gray")
-    val frontGray: String,
+    val frontGray: String?,
 
     @SerialName("front_transparent")
-    val frontTransparent: String
+    val frontTransparent: String?
 )
 
 @Serializable
 data class GenerationIi(
-    val crystal: Crystal,
-    val gold: Gold,
-    val silver: Gold
+    val crystal: Crystal?,
+    val gold: Gold?,
+    val silver: Gold?
 )
 
 @Serializable
 data class Crystal(
     @SerialName("back_default")
-    val backDefault: String,
+    val backDefault: String?,
 
     @SerialName("back_shiny")
-    val backShiny: String,
+    val backShiny: String?,
 
     @SerialName("back_shiny_transparent")
-    val backShinyTransparent: String,
+    val backShinyTransparent: String?,
 
     @SerialName("back_transparent")
-    val backTransparent: String,
+    val backTransparent: String?,
 
     @SerialName("front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
 
     @SerialName("front_shiny")
-    val frontShiny: String,
+    val frontShiny: String?,
 
     @SerialName("front_shiny_transparent")
-    val frontShinyTransparent: String,
+    val frontShinyTransparent: String?,
 
     @SerialName("front_transparent")
-    val frontTransparent: String
+    val frontTransparent: String?
 )
 
 @Serializable
 data class Gold(
     @SerialName("back_default")
-    val backDefault: String,
+    val backDefault: String?,
 
     @SerialName("back_shiny")
-    val backShiny: String,
+    val backShiny: String?,
 
     @SerialName("front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
 
     @SerialName("front_shiny")
-    val frontShiny: String,
+    val frontShiny: String?,
 
     @SerialName("front_transparent")
     val frontTransparent: String? = null
@@ -247,34 +247,34 @@ data class Gold(
 
 @Serializable
 data class GenerationIii(
-    val emerald: OfficialArtwork,
+    val emerald: OfficialArtwork?,
 
     @SerialName("firered-leafgreen")
-    val fireredLeafgreen: Gold,
+    val fireredLeafgreen: Gold?,
 
     @SerialName("ruby-sapphire")
-    val rubySapphire: Gold
+    val rubySapphire: Gold?
 )
 
 @Serializable
 data class OfficialArtwork(
     @SerialName("front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
 
     @SerialName("front_shiny")
-    val frontShiny: String
+    val frontShiny: String?
 )
 
 @Serializable
 data class Home(
     @SerialName("front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
 
     @SerialName("front_female")
     val frontFemale: JsonElement? = null,
 
     @SerialName("front_shiny")
-    val frontShiny: String,
+    val frontShiny: String?,
 
     @SerialName("front_shiny_female")
     val frontShinyFemale: JsonElement? = null
@@ -282,16 +282,16 @@ data class Home(
 
 @Serializable
 data class GenerationVii(
-    val icons: DreamWorld,
+    val icons: DreamWorld?,
 
     @SerialName("ultra-sun-ultra-moon")
-    val ultraSunUltraMoon: Home
+    val ultraSunUltraMoon: Home?
 )
 
 @Serializable
 data class DreamWorld(
     @SerialName("front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
 
     @SerialName("front_female")
     val frontFemale: JsonElement? = null
@@ -299,18 +299,18 @@ data class DreamWorld(
 
 @Serializable
 data class GenerationViii(
-    val icons: DreamWorld
+    val icons: DreamWorld?
 )
 
 @Serializable
 data class Other(
     @SerialName("dream_world")
-    val dreamWorld: DreamWorld,
+    val dreamWorld: DreamWorld?,
 
-    val home: Home,
+    val home: Home?,
 
     @SerialName("official-artwork")
-    val officialArtwork: OfficialArtwork
+    val officialArtwork: OfficialArtwork?
 )
 
 @Serializable
@@ -323,7 +323,7 @@ data class Stat(
 )
 
 @Serializable
-data class Type(
+data class TypeDto(
     val slot: Long,
     val type: Species
 )

@@ -1,11 +1,11 @@
-package com.prmto.poxedexkmm.home.data.responses
+package com.prmto.poxedexkmm.home.data.model.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class PokemonList(
-    val count: Long,
-    val next: String,
+    val count: Int,
+    val next: String?,
     val previous: String? = null,
     val results: List<Result>
 )

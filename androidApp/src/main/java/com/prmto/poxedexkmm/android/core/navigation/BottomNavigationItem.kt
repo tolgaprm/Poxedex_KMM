@@ -23,6 +23,7 @@ fun rememberBottomNavigationItems() = remember {
 
 val bottomNavigationItems = listOf(
     BottomNavigationItem(
+        selected = true,
         labelTextRes = R.string.pokemon,
         route = Screens.HomeScreen.route,
         selectedIconDrawable = R.drawable.home_selected,

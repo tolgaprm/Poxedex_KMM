@@ -2,6 +2,8 @@ package com.prmto.poxedexkmm.home.presentation
 
 import com.prmto.poxedexkmm.core.data.Order
 import com.prmto.poxedexkmm.core.data.PokemonType
+import com.prmto.poxedexkmm.home.data.model.dto.PokemonDto
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,11 +16,10 @@ class HomeViewModel(
 
     val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
-    private val _state = MutableStateFlow(
-        HomeScreenState()
-    )
-
+    @NativeCoroutinesState
+    private val _state = MutableStateFlow(HomeScreenState())
     val state = _state.asStateFlow()
+
 
     fun onEvent(event: HomeScreenEvent) {
         when (event) {
@@ -38,5 +39,12 @@ class HomeViewModel(
 
     private fun onOrderSelected(order: Order) {
         _state.update { it.copy(selectedOrderType = order) }
+    }
+
+    private fun onChangePokemonList(list: List<PokemonDto>) {
+        if (state.value.searchText.isEmpty()) {
+
+        }
+
     }
 }
