@@ -7,13 +7,14 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.prmto.poxedexkmm.android.core.navigation.Screens
 import com.prmto.poxedexkmm.android.home.presentation.AndroidHomeViewModel
 import com.prmto.poxedexkmm.android.home.presentation.HomeScreen
+import com.prmto.poxedexkmm.home.presentation.HomeScreenState
 import org.koin.androidx.compose.getViewModel
 
 fun NavGraphBuilder.homeScreen() {
 
     composable(Screens.HomeScreen.route) {
         val viewModel = getViewModel<AndroidHomeViewModel>()
-        val homeState = viewModel.state.collectAsStateWithLifecycle()
+        val homeState = viewModel.state.collectAsStateWithLifecycle(HomeScreenState())
         val pokemonPagingItems = viewModel.pokemon.collectAsLazyPagingItems()
 
         HomeScreen(

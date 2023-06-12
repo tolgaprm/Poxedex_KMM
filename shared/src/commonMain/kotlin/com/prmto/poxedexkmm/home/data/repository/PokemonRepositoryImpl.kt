@@ -2,9 +2,9 @@ package com.prmto.poxedexkmm.home.data.repository
 
 import com.kuuurt.paging.multiplatform.Pager
 import com.kuuurt.paging.multiplatform.PagingConfig
-import com.kuuurt.paging.multiplatform.PagingData
 import com.kuuurt.paging.multiplatform.PagingResult
 import com.kuuurt.paging.multiplatform.helpers.cachedIn
+import com.prmto.poxedexkmm.core.util.asCommonFlow
 import com.prmto.poxedexkmm.home.data.mapper.toPokemon
 import com.prmto.poxedexkmm.home.data.remote.PokemonApi
 import com.prmto.poxedexkmm.home.data.util.Util.BASE_URL_POKEMON
@@ -18,7 +18,6 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.flow.Flow
 
 class PokemonRepositoryImpl(
     private val pokemonApi: PokemonApi
@@ -27,8 +26,18 @@ class PokemonRepositoryImpl(
     private val scope = MainScope()
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    override fun getPokemonPaging(): Flow<PagingData<Pokemon>> {
-        return try {
+    override val getPokemonPaging
+        get() = try {
+            getPokemonPager.pagingData.cachedIn(scope = scope)
+        } catch (e: IOException) {
+            throw PagingException(PagingError.SERVICE_UNAVAILABLE)
+        } catch (e: Exception) {
+            throw PagingException(PagingError.UNKNOWN_ERROR)
+        }.asCommonFlow()
+
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+    override val getPokemonPager: Pager<String, Pokemon>
+        get() =
             Pager<String, Pokemon>(
                 clientScope = scope,
                 config = PagingConfig(
@@ -36,12 +45,12 @@ class PokemonRepositoryImpl(
                     enablePlaceholders = false
                 ),
                 initialKey = BASE_URL_POKEMON,
-                getItems = { currentKey, size ->
+                getItems = { currentKey, _ ->
                     val response = pokemonApi.getPokemonList(currentKey)
 
                     val pokemon = response.results.map { result ->
                         scope.async {
-                            pokemonApi.getPokemon(result.name)
+                            pokemonApi.getPokemon(result.url)
                         }
                     }.awaitAll()
 
@@ -52,11 +61,5 @@ class PokemonRepositoryImpl(
                         nextKey = { response.next }
                     )
                 }
-            ).pagingData.cachedIn(scope = scope)
-        } catch (e: IOException) {
-            throw PagingException(PagingError.SERVICE_UNAVAILABLE)
-        } catch (e: Exception) {
-            throw PagingException(PagingError.UNKNOWN_ERROR)
-        }
-    }
+            )
 }

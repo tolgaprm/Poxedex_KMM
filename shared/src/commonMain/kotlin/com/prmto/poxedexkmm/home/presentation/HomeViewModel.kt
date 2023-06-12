@@ -4,7 +4,7 @@ import com.prmto.poxedexkmm.core.data.OrderType
 import com.prmto.poxedexkmm.core.data.PokemonType
 import com.prmto.poxedexkmm.home.domain.model.Pokemon
 import com.prmto.poxedexkmm.home.domain.repository.PokemonRepository
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,16 +17,14 @@ class HomeViewModel(
     coroutineScope: CoroutineScope? = null
 ) : KoinComponent {
 
-    private val pokemonRepository: PokemonRepository by inject()
+    val pokemonRepository: PokemonRepository by inject()
+
 
     private val viewModelScope = coroutineScope ?: CoroutineScope(Dispatchers.Main)
 
-    @NativeCoroutinesState
-    val pokemonPagingData = pokemonRepository.getPokemonPaging()
-
-
-    @NativeCoroutinesState
     private val _state = MutableStateFlow(HomeScreenState())
+
+    @NativeCoroutines
     val state = _state.asStateFlow()
 
 
@@ -134,6 +132,12 @@ class HomeViewModel(
         return pokemonList.filter { pokemon ->
             pokemon.type.any { it.id == state.value.selectedPokemonType.id }
         }
+    }
+
+
+    // Only for ios
+    fun onIosViewModelCreated(state: HomeScreenState) {
+        _state.update { state }
     }
 
     private fun onFavoriteClicked(pokemon: Pokemon) {

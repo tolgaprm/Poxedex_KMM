@@ -14,14 +14,14 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
+fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         modules(commonModule(), splashModule, platformModule())
         appDeclaration()
     }
 
 // called by iOS etc
-fun initKoin() = initKoin(enableNetworkLogs = false) {}
+fun initKoin() = initKoin {}
 
 fun commonModule() = module {
     single { createHttpClient(get()) }
