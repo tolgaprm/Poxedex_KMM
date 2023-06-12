@@ -1,5 +1,6 @@
 package com.prmto.poxedexkmm.android.home.data
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.prmto.poxedexkmm.home.data.mapper.toPokemon
@@ -22,19 +23,25 @@ class PokemonPagingSource(
     }
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Pokemon> {
-        val nextPage = params.key ?: "https://pokeapi.co/api/v2/pokemon"
-        val response = pokemonApi.getPokemonList(nextPage)
+        return try {
+            val nextPage = params.key ?: "https://pokeapi.co/api/v2/pokemon"
+            val response = pokemonApi.getPokemonList(nextPage)
 
-        val pokemon = response.results.map { result ->
-            scope.async(Dispatchers.IO) {
-                pokemonApi.getPokemon(result.url)
-            }
-        }.awaitAll()
+            val pokemon = response.results.map { result ->
+                scope.async(Dispatchers.IO) {
+                    pokemonApi.getPokemon(result.url)
+                }
+            }.awaitAll()
 
-        return LoadResult.Page(
-            data = pokemon.map { it.toPokemon() },
-            prevKey = response.previous,
-            nextKey = response.next
-        )
+            LoadResult.Page(
+                data = pokemon.map { it.toPokemon() },
+                prevKey = response.previous,
+                nextKey = response.next
+            )
+        } catch (e: Exception) {
+            Log.e("PokemonPagingSource", "load: ${e.message}")
+            LoadResult.Error(e)
+        }
+
     }
 }

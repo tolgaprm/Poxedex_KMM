@@ -7,4 +7,5 @@
     <string name="choose_type">Choose Type</string>
     <string name="select_the_order">Select the order</string>
     <string name="favorite">Favorite</string>
+    <string name="favorite_button">Favorite Button</string>
 </resources>

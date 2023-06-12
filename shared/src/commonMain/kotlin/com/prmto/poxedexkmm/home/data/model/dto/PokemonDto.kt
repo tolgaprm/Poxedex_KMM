@@ -11,19 +11,19 @@ data class PokemonDto(
     val abilities: List<Ability>,
 
     @SerialName("base_experience")
-    val baseExperience: Long,
+    val baseExperience: Int,
 
     val forms: List<Species>,
 
     @SerialName("game_indices")
     val gameIndices: List<GameIndex>,
 
-    val height: Long,
+    val height: Int,
 
     @SerialName("held_items")
     val heldItems: JsonArray,
 
-    val id: Long,
+    val id: Int,
 
     @SerialName("is_default")
     val isDefault: Boolean,
@@ -33,7 +33,7 @@ data class PokemonDto(
 
     val moves: List<Move>,
     val name: String,
-    val order: Long,
+    val order: Int,
 
     @SerialName("past_types")
     val pastTypes: JsonArray,
@@ -42,7 +42,7 @@ data class PokemonDto(
     val sprites: Sprites,
     val stats: List<Stat>,
     val types: List<TypeDto>,
-    val weight: Long
+    val weight: Int
 )
 
 @Serializable

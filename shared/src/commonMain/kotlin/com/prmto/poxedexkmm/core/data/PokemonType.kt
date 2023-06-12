@@ -31,14 +31,10 @@ val pokemonTypes = listOf(
     PokemonType(18, "Fairy", Colors.Fairy)
 ).sortedBy { it.name }
 
-data class Order(
-    val id: Int,
-    val name: String
-)
 
-val order = listOf(
-    Order(0, "Smallest number"),
-    Order(1, "Largest number"),
-    Order(2, "A-Z"),
-    Order(3, "Z-A"),
-)
+enum class OrderType(id: Int, name: String) {
+    SmallestNumber(0, "Smallest number"),
+    LargestNumber(1, "Largest number"),
+    AZ(2, "A-Z"),
+    ZA(3, "Z-A"),
+}
