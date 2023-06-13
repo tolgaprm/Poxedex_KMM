@@ -50,7 +50,7 @@ dependencies {
     implementation(libs.compose.navigation)
     implementation(libs.paging.runtime)
     implementation(libs.lifecycle.runtime.compose)
-
+    implementation(libs.androidx.paging.compose)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)

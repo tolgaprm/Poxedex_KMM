@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("com.google.devtools.ksp")
     id("com.rickclephas.kmp.nativecoroutines")
+    kotlin("plugin.serialization") version "1.8.0"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -39,6 +40,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.androidXLifecycleViewModelKtx)
+                implementation(libs.ktor.android)
             }
         }
         val commonMain by getting {
